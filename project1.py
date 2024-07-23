@@ -1,3 +1,6 @@
+import streamlit as st
+import joblib
+import numpy as np
 import joblib
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import make_regression
@@ -13,16 +16,14 @@ rf_model.fit(X, y)
 joblib.dump(rf_model, 'house_price_model.pkl')
 
 
-import streamlit as st
-import joblib
-import numpy as np
+
 
 # Load the model
 model_path = 'house_price_model.pkl'
 # Check if the model file exists
 try:
     model = joblib.load(model_path)
-    st.write("Model loaded successfully.")
+    #st.write("Model loaded successfully.")
 except FileNotFoundError:
     st.error(f"Model file not found. Please ensure {model_path} is in the current directory.")
 except ModuleNotFoundError:
@@ -58,7 +59,3 @@ if st.button('Predict'):
             st.error("Model is not loaded. Please ensure the model file is available.")
     else:
         st.error("Model is not loaded. Please ensure the model file is available.")
-
-# Instructions on how to run the app
-st.write("Save this script as `app.py` and run it with the following command:")
-st.code("streamlit run app.py", language="bash")
